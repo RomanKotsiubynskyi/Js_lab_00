@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<title>Functions & Closures</title>
+
+<head>
+
+</head>
+
+<body>
+  Functions & Closures
+
+  <h1 id="myHeader">HEALTH 100</h1>
+
+  <button onclick="heal()">HEAL</button>
+  <br><br>
+  <button onclick="poison1()">POISON</button>
+  <br><br>
+  <button onclick="poisonHit()">POISON HIT</button>
+  <br><br>
+
+  <h2 id="myHeader2">COMBO HIT 100</h2>
+  <h2 id="myHeader3">COMBO DAMAGE 100</h2>
+
+  <script>'use strict';
+    //function expression,  anonymous function
+    let heal = function () {
+      document.getElementById("myHeader").innerHTML = ('HEALTH' + ' ' + 100);
+    };
+
+    // function declaration
+    function poison1() {
+      let health = 100;
+
+      do {
+        alert('HEALTH' + ' ' + health);
+        document.getElementById("myHeader").innerHTML = ('HEALTH' + ' ' + health);
+        health -= 2;
+      }
+
+      while (health > 90);
+    }
+
+
+    //function expression,  anonymous function
+    let poisonHit = function () {
+      for (let health = 100; health > 50; health -= 11) {
+        alert('HEALTH' + ' ' + health);
+        document.getElementById("myHeader").innerHTML = ('HEALTH' + ' ' + health);
+      }
+
+    }; //don't foget about semicolon;
+
+    // poisonHit();
+
+    //lambda function
+    let comboHit = (hit1, hit2, hit3) => (hit1 + hit2 + hit3);
+    console.log('lambda function');
+    console.log('COMBO HIT ' + comboHit(20, 15, 10));
+
+    let health2 = 100;
+    console.log('HEALTH BEFORE HIT' + ' ' + health2);
+    health2 -= comboHit(20, 15, 10);
+
+    document.getElementById("myHeader2").innerHTML = ('HEALTH AFTER HIT' + ' ' + health2);
+    console.log('HEALTH AFTER HIT' + ' ' + health2 + '\n\n');
+
+
+    //Multiline lambda function
+    let comboHitDamage = (h) => {
+      let hit1 = 20;
+      let hit2 = 15;
+      let hit3 = 25;
+      let health = h - (hit1 + hit2 + hit3);
+      return health;
+    };
+
+    console.log('Multiline lambda function');
+    console.log('COMBO DAMAGE' + ' ' + comboHitDamage(100) + '\n\n');
+    document.getElementById("myHeader3").innerHTML = ('COMBO DAMAGE' + ' ' + comboHitDamage(100));
+
+    //Closures var 1
+    console.log('Closures var 1');
+
+    let dm = 1000; // global variable
+    let hit4 = 10;
+    let hit5 = 20;
+    let hlth = 100;
+
+    function health(aa, bb) {
+      dm = hlth - (aa + bb); // local variable
+      function displayHealth() {
+      }
+    }
+
+    console.log('d Global Lexical Environment' + ' ' + dm);
+    health(hit4, hit5)
+    console.log('d Inner Lexical Environment' + ' ' + dm + '\n\n');
+
+
+  </script>
+</body>
+
+</html>
